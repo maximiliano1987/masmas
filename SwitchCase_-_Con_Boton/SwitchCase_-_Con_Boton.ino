@@ -3,6 +3,7 @@
 #define NUM_LEDS    8
 CRGB leds[NUM_LEDS];
 
+int botonpin = 00;
 int botonpin = 2;
 int I = 0;
 int estadoboton = 0;
