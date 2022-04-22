@@ -15,7 +15,7 @@ TM1637Display display = TM1637Display(CLK, DIO); // Conexion Display CLK, DIO en
 
 const char *ssid = "Casa 1";       // <----escriba  nombre de su router
 const char *password = "maxi1987"; // <------escriba  el password
-const char* host = "RelojMulti";
+const char *host = "RelojMulti";
 
 const long utcOffsetInSeconds = -14400; // varicion de segundos depende a cada pais
 
@@ -43,8 +43,8 @@ void setup()
   }
   Serial.println("Conexion exitosa");
 
-   WIFIII(); // metodo OTA
-  
+  WIFIII(); // metodo OTA
+
   ////////////////////////////////
   timeClient.begin();
 
@@ -95,7 +95,7 @@ void contador()
 
     for (int i = 0; i < 8; i++)
     {
-      leds[i] = CRGB(255, 215, 0); //amarillo
+      leds[i] = CRGB(255, 215, 0); // amarillo
       FastLED.show();
     }
 
@@ -106,7 +106,7 @@ void contador()
 
     for (int i = 0; i < 8; i++)
     {
-      leds[i] = CRGB(255, 0, 0); //rojo
+      leds[i] = CRGB(255, 0, 0); // rojo
       FastLED.show();
     }
     break;
@@ -115,7 +115,7 @@ void contador()
     Serial.println("Caso 4");
     for (int i = 0; i < 8; i++)
     {
-      leds[i] = CRGB(0,0,128); //azul
+      leds[i] = CRGB(0, 0, 128); // azul
       FastLED.show();
     }
 
@@ -123,14 +123,13 @@ void contador()
 
   case 5:
     Serial.println("Caso 5");
-  
-     
-  for (int i = 0; i < 8; i++)
+
+    for (int i = 0; i < 8; i++)
     {
-      leds[i] = CRGB(0, 255, 0); //verde
+      leds[i] = CRGB(0, 255, 0); // verde
       FastLED.show();
     }
-    
+
     break;
   }
   delay(500);
@@ -200,7 +199,8 @@ void Horaa()
 
 void WIFIII()
 {
- ArduinoOTA.onStart([]() {
+  ArduinoOTA.onStart([]()
+                     {
     String type;
     if (ArduinoOTA.getCommand() == U_FLASH) {
       type = "sketch";
@@ -209,19 +209,17 @@ void WIFIII()
     }
 
     // NOTE: if updating FS this would be the place to unmount FS using FS.end()
-    Serial.println("Start updating " + type);
-  });
-  ArduinoOTA.onEnd([]() {
-    Serial.println("\nEnd");
-  });
-  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
-  });
-   ArduinoOTA.setHostname(host);
+    Serial.println("Start updating " + type); });
+  ArduinoOTA.onEnd([]()
+                   { Serial.println("\nEnd"); });
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total)
+                        { Serial.printf("Progress: %u%%\r", (progress / (total / 100))); });
+  ArduinoOTA.setHostname(host);
   ArduinoOTA.onStart([]() { // switch off all the PWMs during upgrade
-  
+
   });
-  ArduinoOTA.onError([](ota_error_t error) {
+  ArduinoOTA.onError([](ota_error_t error)
+                     {
     Serial.printf("Error[%u]: ", error);
     if (error == OTA_AUTH_ERROR) {
       Serial.println("Auth Failed");
@@ -233,13 +231,12 @@ void WIFIII()
       Serial.println("Receive Failed");
     } else if (error == OTA_END_ERROR) {
       Serial.println("End Failed");
-    }
-  });
+    } });
   ArduinoOTA.begin();
   Serial.println("Ready");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  }
+}
 
 /*------------*/
 void c_pacman_c()
